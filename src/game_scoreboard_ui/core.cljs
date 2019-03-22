@@ -115,13 +115,16 @@
 
 
 ;; Replace an existing value
-#_(swap! app-state assoc :text "Hello REPL, my friend")
+#_
+(swap! app-state assoc :text "Hello REPL, my friend")
 
 ;; Create a new value
-#_(swap! app-state assoc :title "Hello REPL, my friend")
+#_
+(swap! app-state assoc :title "Hello REPL, my friend")
 
 ;; Reset the state back to the original state
-#_(reset! app-state {:text "Hello world!"})
+#_
+(reset! app-state {:text "Hello world!"})
 
 
 
