@@ -1,12 +1,28 @@
 # game-scoreboard-ui
 
-FIXME: Write a one-line description of your library/project.
+A Website in ClojureScript to consume data from the [Game Scoreboard API](https://github.com/practicalli/game-scoreboard) and visualise it.
 
 ## Overview
 
-FIXME: Write a paragraph about the library/project and highlight its goals.
+A project to show the different options for calling and consuming data from API's, specifically the [Game Scoreboard API](https://github.com/practicalli/game-scoreboard).
 
 ## Development
+
+Open this project in your favourite Clojure editor/IDE and run the ClojureScript repl using `figwheel-main` and the `dev` profile
+
+### Spacemacs
+
+`, "` or `M-RET "` in a buffer with a ClojureScript file will start a ClojureScript REPL.
+
+Choose `figwheel-main` when prompted to select the ClojureScript REPL type.
+
+Enter `dev` when prompted to select the figwheel-main build.
+
+Open the REPL buffer (use `SPC b b` to list the available buffers) and enter the following code to test the REPL connection is working well.
+
+    (js/alert "Am I connected?")
+
+### Command line
 
 To get an interactive development environment run:
 
@@ -22,16 +38,16 @@ and you should see an alert in the browser window.
 
 To clean all compiled files:
 
-	lein clean
+    lein clean
 
 To create a production build run:
 
-	lein clean
-	lein fig:min
+    lein clean
+    lein fig:min
 
 
 ## License
 
-Copyright © 2018 FIXME
+Copyright © 2018 Practicalli
 
-Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
+Distributed under the Creative Commons Attribution Share-Alike 4.0 International
