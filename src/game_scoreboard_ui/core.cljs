@@ -29,9 +29,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;
 
 (defn hello-world []
-  [:div
-   [:h1 (:text @app-state)]
-   [:h3 "A simple component that also displays the data model"]])
+  [:section {:class "section"}
+   [:div {:class "container"}
+    [:h1 {:class "title"}(:text @app-state)]
+    [:h3 "A simple component that also displays the data model"]]])
 
 
 ;; System related functions
@@ -92,3 +93,36 @@
 
 ;; Reset the state back to the original state
 #_(reset! app-state {:text "Hello world!"})
+
+
+
+
+;; Bulma CSS Library
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Bulma is a CSS library for websites based on flexbox
+;; Bluma is said to be a little simpler than Bootstrap and considerably
+;; smaller.  Not sure if this is just due to not having an JavaScript.
+
+;; Getting started
+;; https://bulma.io/documentation/overview/start/
+
+;; CDN
+;; There are three links, I am assuming bluma.min.css is the only one
+;; needed as we will just be using it minified.
+;; https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css
+
+;; need to add this to either an index.html page or as a hiccup page in the Clojure code.
+
+;; In the index.html, add the following in the <head></head> tag (uncommented)
+;; <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+;; <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+;; Then add styles to our existing Clojure code, specifically our `hello-world` component
+
+;; Add a section (provides a nice margin), with a container, that displays our title and some paragraph text
+
+#_(defn hello-world []
+    [:section {:class "section"}
+     [:div {:class "container"}
+      [:h1 {:class "title"}(:text @app-state)]
+      [:h3 "A simple component that also displays the data model"]]])
