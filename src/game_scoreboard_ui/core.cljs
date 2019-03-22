@@ -58,3 +58,37 @@
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)
 )
+
+
+;; REPL Design Journal
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; The code in this section is commented so it will only be run when
+;; a developer manually evaluates it.
+;; Code is commented using the reader macro comment, `#_`
+
+;; Manipulating the state of the UI
+;;;;;
+
+;; The UI state is held in a reagent atom, a mutable container
+;; Reagent watches for changes to the atom and calls any components
+;; that would be affected by that change, causing the component to be redrawn.
+
+;; The atom is named `app-state` and was created by the figwheel Leiningen
+;; template when we created the project.
+
+;; The atom is defined using `defonce` so the atom does not change when
+;; you save code changes, unless the code specifically updates the atom.
+
+;; The state can be changed using the `swap!` and `reset!` functions
+;; either in functions you call or when just experimenting in the repl.
+
+
+;; Replace an existing value
+#_(swap! app-state assoc :text "Hello REPL, my friend")
+
+;; Create a new value
+#_(swap! app-state assoc :title "Hello REPL, my friend")
+
+;; Reset the state back to the original state
+#_(reset! app-state {:text "Hello world!"})
