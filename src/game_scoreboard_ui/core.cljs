@@ -22,17 +22,27 @@
 ;; Data model
 ;;;;;;;;;;;;;
 ;; define your app data so that it doesn't get over-written on reload
-(defonce app-state (atom {:text "Hello world!"}))
+(defonce app-state (atom {:website-title    "Global Scoreboard"
+                          :website-subtitle "Player scores from around the world"}))
 
 
 ;; Web page components
 ;;;;;;;;;;;;;;;;;;;;;;
 
-(defn hello-world []
   [:section {:class "section"}
    [:div {:class "container"}
     [:h1 {:class "title"}(:text @app-state)]
     [:h3 "A simple component that also displays the data model"]]])
+(defn scoreboard-page []
+  [:div
+   [:section {:class "hero is-info is-bold"}
+    [:div {:class "hero-body"}
+     [:div {:class "container"}
+      [:h1 {:class "title"}(:website-title @app-state)]
+      [:h3 {:class "subtitle"}(:website-subtitle @app-state)]]]]
+
+   ]
+  )
 
 
 ;; System related functions
@@ -42,7 +52,7 @@
   (gdom/getElement "app"))
 
 (defn mount [el]
-  (reagent/render-component [hello-world] el))
+  (reagent/render-component [scoreboard-page] el))
 
 (defn mount-app-element []
   (when-let [el (get-app-element)]
@@ -121,8 +131,35 @@
 
 ;; Add a section (provides a nice margin), with a container, that displays our title and some paragraph text
 
-#_(defn hello-world []
-    [:section {:class "section"}
-     [:div {:class "container"}
-      [:h1 {:class "title"}(:text @app-state)]
-      [:h3 "A simple component that also displays the data model"]]])
+#_
+(defn hello-world []
+  [:section {:class "section"}
+   [:div {:class "container"}
+    [:h1 {:class "title"}(:text @app-state)]
+    [:h3 "A simple component that also displays the data model"]]])
+
+
+;; Refactor to scoreboard
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; update the app-state to include basic info about the website
+
+#_
+(defonce app-state (atom {:website-title    "Global Scoreboard"
+                          :website-subtitle "Player scores from around the world"}))
+
+;; update the component function that represents the scoreboard single page app
+
+#_
+(defn scoreboard []
+  [:section {:class "section"}
+   [:div {:class "container"}
+    [:h1 {:class "title"}(:website-title @app-state)]
+    [:h3 (:website-subtitle @app-state)]]])
+
+;; update the system code to use the new component
+
+#_
+(defn mount [el]
+  (reagent/render-component [scoreboard] el))
+
