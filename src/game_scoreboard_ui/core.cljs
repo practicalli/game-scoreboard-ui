@@ -25,14 +25,32 @@
 (defonce app-state (atom {:website-title    "Global Scoreboard"
                           :website-subtitle "Player scores from around the world"}))
 
+;; local test data - to be replaced by api call
+(def scoreboard-source [{:player-name "RachelRiot"
+                         :score       5448983438944}
+                        {:player-name "JennyJetpack"
+                         :score       489743984372}])
 
 ;; Web page components
 ;;;;;;;;;;;;;;;;;;;;;;
 
+(defn score-card
+  "Visualises score details using Bluma styles"
+  [score-details]
+  [:div {:class "box"}
+   [:h1 {:class "title"}(:player-name score-details)]
+   [:h3 {:class "subtitle"}(:score score-details)]])
+
+(defn scoreboard
+  "Display all the player scores
+  Takes a vector of maps, for each map a player-card is created "
+  [score-map]
   [:section {:class "section"}
-   [:div {:class "container"}
-    [:h1 {:class "title"}(:text @app-state)]
-    [:h3 "A simple component that also displays the data model"]]])
+   [:div {:class "content"}
+    (for [player-details score-map]
+      [score-card player-details])]])
+
+
 (defn scoreboard-page []
   [:div
    [:section {:class "hero is-info is-bold"}
@@ -41,6 +59,7 @@
       [:h1 {:class "title"}(:website-title @app-state)]
       [:h3 {:class "subtitle"}(:website-subtitle @app-state)]]]]
 
+   [scoreboard scoreboard-source]
    ]
   )
 
@@ -163,3 +182,13 @@
 (defn mount [el]
   (reagent/render-component [scoreboard] el))
 
+
+;; scoreboard-source
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; local test data - to be replaced by api call
+#_
+(def scoreboard-source [{:player-name "RachelRiot"
+                         :score       5448983438944}
+                        {:player-name "JennyJetpack"
+                         :score       489743984372}])
