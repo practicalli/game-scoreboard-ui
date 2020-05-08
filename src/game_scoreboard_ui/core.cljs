@@ -10,7 +10,11 @@
 (ns ^:figwheel-hooks game-scoreboard-ui.core
   (:require
    [goog.dom :as gdom]
-   [reagent.core :as reagent :refer [atom]]))
+   [reagent.core :as reagent :refer [atom]]
+   [cljs-http.client :as http]
+   [cljs.core.async :refer [<!]])
+  (:require-macros
+   [cljs.core.async.macros :refer [go]]))
 
 ;; Helper functions
 ;;;;;;;;;;;;;;;;;;;
@@ -18,6 +22,23 @@
 (println "This text is printed from src/game_scoreboard_ui/core.cljs. Go ahead and edit it and see reloading in action.")
 
 (defn multiply [a b] (* a b))
+
+
+(def api-endpoints
+  {:local      {:random-score "http://localhost:3000/game/random-score"}
+   :heroku-dev {:random-score "https://game-scoreboard-api.herokuapp.com/game/random-score "}})
+
+(defn get-api [endpoint]
+  (go (let [response (<! (http/get endpoint {:with-credentials? false}))]
+        ;;enjoy your data
+        (js/console.log (:body response)))))
+
+;; Gets the json object from the Game Scoreboard API
+(get-api (get-in api-endpoints [:local :random-score]))
+
+;; Heroku dev
+#_(get-api (get-in api-endpoints [:heroku-dev :random-score]))
+
 
 ;; Data model
 ;;;;;;;;;;;;;
